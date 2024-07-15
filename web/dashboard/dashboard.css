@@ -1,0 +1,313 @@
+:root {
+    --card-height: 300px;
+    --card-width: calc(var(--card-height) / 1.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: auto;
+    display: grid;
+    place-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.profil-scroll-container {
+    overflow-x: auto;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.profil-container {
+    display: flex;
+    margin-bottom: 20px;
+    width: 100%;
+    justify-content: flex-start;
+    min-width: 500px;
+    
+}
+
+.profil-container .player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin: 0 25px;
+}
+
+.profil2, .profil3{
+    width: 200px;
+    height: 300px;
+}
+figcaption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    width:100vw;
+    max-width: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-scroll {
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.button-scroll .button {
+    width: 1000px; /* Buat ngatur lebar button*/
+}
+
+/* ubah ukuran chart disini */
+canvas {
+    display: block;
+    width: 400px !important;
+    height: 400px !important;
+}
+
+.score {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: default;
+    border-radius: 16px;
+}
+
+.label {
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.button {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.toggleButtons {
+    display: flex;
+    justify-content: flex-start; /*masalah yang button1 sebagian gabisa diliat(mendelep), ngubah dari center -> flex-start*/
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.toggleButton.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #000;
+}
+
+.object {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    align-items: center;
+}
+
+.object .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    padding: 15px 30px;
+    position:relative;
+    font-size: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
+    font-weight: bold;
+    color: #000;
+    border: none;
+    background: transparent;
+    text-align: center;
+}
+
+.object .button:hover {
+    color: #616161;
+}
+
+.button::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: blue;
+    transition: widht 0.3s;
+}
+
+.button.active::after {
+    width: 30%;
+    left: 0;
+}
+
+.button.active {
+    color: blue;
+}
+
+.tooltip button {
+    display: inline-block;
+    margin: 0;
+    padding: 15px 30px;
+    position: relative;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/*mengubah model scroll bar*/
+.button-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.button-scroll::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+/*----------------------*/
+
+.card {
+    width: var(--card-width);
+    height: var(--card-height);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 36px;
+    perspective: 2500px;
+    margin: 0 50px;
+}
+
+.cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wrapper {
+    transition: all 0.5s;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}
+
+.card:hover .wrapper {
+    transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+    box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+}
+
+.wrapper::before,
+.wrapper::after {
+    content: "";
+    opacity: 0;
+    width: 100%;
+    height: 80px;
+    transition: all 0.5s;
+    position: absolute;
+    left: 0;
+}
+
+.wrapper::before {
+    top: 0;
+    height: 100%;
+    background-image: linear-gradient(
+        to top,
+        transparent 46%,
+        rgba(12, 13, 19, 0.5) 68%,
+        rgba(12, 13, 19) 97%
+    );
+}
+
+.wrapper::after {
+    bottom: 0;
+    opacity: 1;
+    background-image: linear-gradient(
+        to bottom,
+        transparent 46%,
+        rgba(12, 13, 19, 0.5) 68%,
+        rgba(12, 13, 19) 97%
+    );
+}
+
+.card:hover .wrapper::before,
+.wrapper::after {
+    opacity: 1;
+}
+
+.card:hover .wrapper::after {
+    height: 120px;
+}
+
+.title {
+    width: 100%;
+    transition: transform 0.5s;
+}
+
+.card:hover .title {
+    transform: translate3d(0%, -50px, 100px);
+}
+
+.character {
+    opacity: 0;
+    transition: all 0.5s;
+    position: absolute;
+    z-index: -1;
+    object-fit: cover;
+    top: 0;
+    width: 75%;
+    height: auto;
+    top: 90px;    
+    
+}
+
+.card:hover .character {
+    opacity: 1;
+    transform: translate3d(0%, -30%, 100px);
+}
